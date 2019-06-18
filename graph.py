@@ -45,11 +45,9 @@ class Graph:
             return self.__next__()
 
 
-
 E = {'A': ['B', 'C', 'D'], 'B': ['C'], 'C': [], 'D': ['A']}
 F = {'A': ['B', 'C', 'D'], 'B': ['M', 'N'], 'C': ['Y'], 'D': ['F', 'G'], 'F': [], 'G': [], 'N': [], 'Y': [], 'M': []}
 graph = Graph(F)
-
 
 for vertice in graph:
     print(vertice)
