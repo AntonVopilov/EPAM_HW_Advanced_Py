@@ -8,12 +8,25 @@ letters = string.ascii_lowercase
 
 
 def caesar(message: str, shift):
+
+    if not isinstance(message, str):
+        raise TypeError('messege is not string')
+
+    if not isinstance(shift, int):
+        raise TypeError('shift is not int')
+
     res = ''
+
     len_letters = len(letters)
+    if len_letters == 0:
+        return res
     for char in message:
-        index_count = lambda index_shift: index_shift if index_shift <= len_letters else \
+        index_count = lambda index_shift: index_shift if index_shift < len_letters else \
             index_count(index_shift % len_letters)
-        res += letters[index_count(letters.index(char) + shift)]
+        try:
+            res += letters[index_count(letters.index(char) + shift)]
+        except ValueError:
+            res += char
     return res
 
 
@@ -33,11 +46,13 @@ class CeasarSipher:
     another_message = ShiftDescriptor(7)
 
 
-a = CeasarSipher()
-
-a.message = 'abc'
-a.another_message = 'hello'
+if __name__ == '__main__':
 
 
-assert a.message == 'efg'
-assert a.another_message == 'olssv'
+    a = CeasarSipher()
+    a.message = 'abc'
+    a.another_message = 'hello'
+    print(a.another_message)
+
+    assert a.message == 'efg'
+    assert a.another_message == 'olssv'
