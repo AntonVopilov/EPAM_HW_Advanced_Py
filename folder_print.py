@@ -60,5 +60,3 @@ class PrintableFolder:
 
 
 
-#print(PrintableFolder('abc'))
-
