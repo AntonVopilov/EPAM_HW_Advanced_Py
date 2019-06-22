@@ -33,12 +33,14 @@ def caesar(message: str, shift):
 class ShiftDescriptor:
     def __init__(self, shift):
         self.shift = shift
+        self._id_name = id(self)
+
 
     def __get__(self, obj, type_self=None):
-        return caesar(obj.__dict__[self.shift], self.shift)
+        return caesar(obj.__dict__[self._id_name], self.shift)
 
     def __set__(self, obj, value) -> None:
-        obj.__dict__[self.shift] = value
+        obj.__dict__[self._id_name] = value
 
 
 class CeasarSipher:
@@ -52,6 +54,7 @@ if __name__ == '__main__':
     a = CeasarSipher()
     a.message = 'abc'
     a.another_message = 'hello'
+
     print(a.another_message)
 
     assert a.message == 'efg'
