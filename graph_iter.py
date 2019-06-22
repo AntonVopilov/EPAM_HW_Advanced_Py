@@ -23,33 +23,20 @@ class Graph:
             for val in values:
                 if val not in self.E:
                     raise TypeError('You graph does not contain description of this vernice', val)
-
-        self._visited_status = set()
-        self._graph_gen = None
-
     
     def __iter__(self):
-        key_end  = len(self.E.keys()) 
-        value_end = None
 
         visited_ver = set()
+
         for key, values in self.E.items():
-            key_end -= 1
             if key not in visited_ver:
                 visited_ver.add(key)
                 yield key
 
-            if  key_end == 0:
-                value_end = True
-
             for i, val in enumerate(values):
                 if val not in visited_ver:
                     visited_ver.add(val)
-                    if value_end and i == len(self.E[key]):
-                        yield val
-                        raise StopIteration
-                    else:
-                        yield val
+                    yield val
        
         
 if __name__ == '__main__':
@@ -59,11 +46,12 @@ if __name__ == '__main__':
     graph = Graph(E)
     for i in graph:
         print(i)
-   
+
     print('\n')
    
     for i in graph:
         for j in graph:
-            print(i, j)
+            for k in graph:
+                print(i, j, k)
     
 
